@@ -13,7 +13,7 @@ class AuthorController extends Controller
     public function index()
     {
         $authors = Author::with('books')->paginate(10);
-        return view('author.index', compact('authors'));
+        return view('authors.index', compact('authors'));
     }
 
     /**
@@ -21,7 +21,7 @@ class AuthorController extends Controller
      */
     public function create()
     {
-        return view('author.create');
+        return view('authors.create');
     }
 
     /**
@@ -45,7 +45,7 @@ class AuthorController extends Controller
     public function show(Author $author)
     {
         $author->load('books');
-        return view('author.show', compact('author'));
+        return view('authors.show', compact('author'));
     }
 
     /**
@@ -53,7 +53,7 @@ class AuthorController extends Controller
      */
     public function edit(Author $author)
     {
-        return view('author.edit', compact('author'));
+        return view('authors.edit', compact('author'));
     }
 
     /**
