@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BookRequest;
 use App\Models\Author;
 use App\Models\Book;
 use Illuminate\Http\Request;
@@ -29,16 +30,10 @@ class BookController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(BookRequest $request, Book $book)
     {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required',
-            'publication_year' => 'required|integer',
-            'authors' => 'required|array'
-        ]);
-
-        $book = Book::create($request->only('title', 'description', 'publication_year'));
+        $book->fill($request->validated());
+        $book->save();
         $book->authors()->attach($request->authors);
 
         return redirect()->route('books.index')->with('success', 'Book created successfully');

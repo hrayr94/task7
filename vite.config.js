@@ -1,18 +1,28 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
+import vue from '@vitejs/plugin-vue';
 
 export default defineConfig({
     plugins: [
         laravel({
-            // Specify your input files
             input: [
-                'resources/css/app.css',
+                'resources/sass/app.scss',
                 'resources/js/app.js',
             ],
-            // Optionally enable refresh for hot module replacement
             refresh: true,
-            // Additional configurations as needed
+        }),
+        vue({
+            template: {
+                transformAssetUrls: {
+                    base: null,
+                    includeAbsolute: false,
+                },
+            },
         }),
     ],
-    // Other Vite configuration options
+    resolve: {
+        alias: {
+            vue: 'vue/dist/vue.esm-bundler.js',
+        },
+    },
 });
