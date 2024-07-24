@@ -26,7 +26,7 @@ class BookRequest extends FormRequest
             'description' => 'required',
             'publication_year' => 'required|integer',
             'authors' => 'required|array',
-            'authors.*' => 'required|integer',
+            'authors.*' => 'required|integer|exists:authors,id',
         ];
     }
 }
